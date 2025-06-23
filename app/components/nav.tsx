@@ -1,14 +1,25 @@
-'use client';
-
+"use client";
+import { UserButton, OrganizationSwitcher } from "@clerk/nextjs";
 const Nav = () => {
-    return (
-        <nav className="bg-gray-800 p-4">
-            <div>
-            <h1 className="text-white text-lg">My Blog</h1>
-            </div>
-            <div></div>
-        </nav>
-    );
-}
+  return (
+    <nav className="p-4 flex justify-between items-center">
+      <div>
+        <h1 className="font-semibold text-2xl">Inkthread</h1>
+      </div>
+      <div className="flex items-center space-x-4">
+        <OrganizationSwitcher
+            appearance={{
+                elements: {
+                organizationSwitcherButton: "bg-white text-gray-800 hover:bg-gray-100",
+                organizationSwitcherPopover: "bg-white shadow-lg rounded-lg",
+                },
+            }} 
+        afterSelectOrganizationUrl={"/org/:slug"}
+        />
+        <UserButton />
+      </div>
+    </nav>
+  );
+};
 
 export default Nav;
