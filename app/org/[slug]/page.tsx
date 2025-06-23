@@ -5,10 +5,23 @@ import Nav from "@/app/components/nav";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { createBlog } from "@/app/org/[slug]/actions";
+import { useOrganization } from "@clerk/nextjs";
 
 export default function OrgLandingPage() {
   const [blogContent, setBlogContent] = useState("");
   const [blogTitle, setBlogTitle] = useState("");
+  const { organization } = useOrganization();
+
+  const handleCreateBlog = async () => {
+    if (!organization) return;
+
+    await createBlog({
+      title: blogTitle.trim(),
+      content: blogContent.trim(),
+      orgId: organization?.id,
+    });
+  };
 
   return (
     <main className="p-4">
@@ -24,7 +37,7 @@ export default function OrgLandingPage() {
           value={blogContent}
           onChange={(e) => setBlogContent(e.target.value)}
         />
-        <Button className="" onClick={() => {}}>
+        <Button className="" onClick={handleCreateBlog}>
           Create New Blog
         </Button>
       </div>
