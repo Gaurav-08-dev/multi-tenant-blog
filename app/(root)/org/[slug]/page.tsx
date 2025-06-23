@@ -5,7 +5,7 @@ import Nav from "@/app/components/nav";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { createBlog } from "@/app/org/[slug]/actions";
+import { createBlog } from "./actions";
 import { useOrganization } from "@clerk/nextjs";
 
 export default function OrgLandingPage() {
